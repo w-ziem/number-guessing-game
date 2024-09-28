@@ -27,7 +27,7 @@ const checkGuess = () => {
    }
 
    else if (guessCount === 10) {
-    lastResult.textContent = "GAME OVER!!!";
+    lastResult.textContent = `GAME OVER!!! Number was ${randomNumber}`;
     lowOrHi.textContent = '';
     setGameOver();
     } else {
@@ -58,3 +58,21 @@ function setGameOver() {
     resetButton.addEventListener('click', resetGame);
 }
 
+function resetGame() {
+    guessCount = 1;
+
+    const resetParas = document.querySelectorAll(".resultParas p");
+    for (const resetPara of resetParas) {
+        resetPara.textContent = '';
+    }
+
+    resetButton.parentNode.removeChild(resetButton);
+
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
+    guessField.value = '';
+    guessField.focus();
+
+    lastResult.style.backgroundColor = 'white';
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+}
